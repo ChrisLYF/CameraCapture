@@ -291,6 +291,14 @@ message(STATUS "ccap: CCAP_BUILD_EXAMPLES=${CCAP_BUILD_EXAMPLES}")
 
 if (CCAP_BUILD_EXAMPLES)
     include(examples/desktop.cmake)
+    
+    # Add Linux-specific examples
+    if (UNIX AND NOT APPLE AND NOT WIN32)
+        if (EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/examples/linux/CMakeLists.txt)
+            message(STATUS "ccap: Including Linux-specific examples")
+            include(examples/linux/CMakeLists.txt)
+        endif ()
+    endif ()
 endif ()
 
 # ############### CLI Tool ################
